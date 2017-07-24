@@ -1,0 +1,13 @@
+package com.walmart.scm.fresh.dao;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.walmart.scm.fresh.model.GPS;
+
+public interface GpsRepository extends CrudRepository<GPS, Long>{
+	
+	List<GPS> findByLocation(String location);
+
+}
