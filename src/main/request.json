@@ -1,0 +1,25 @@
+{
+	"timestamp":"2017-06-07T15:01:53",
+	"ambientTemp":24.962,
+	"shelfLife":14.5, 
+	"batteryLife":68.0,
+	"humidity":41.0,
+	"proximity":2256.0,
+	"light":1709.0,
+	"vibration":-1.0,
+	"gps":
+	[
+		{
+			"latitude":"40.6",
+			"longitude": "76.8",
+			"location": "Houstan GDC",
+			"context": "gps"
+		},
+		{
+			"latitude":"70.6",
+			"longitude": "46.8",
+			"location": "New York GDC",
+			"context": "cell"
+		}
+	]
+}
