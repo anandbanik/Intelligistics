@@ -28,6 +28,7 @@ public static final Logger logger = LoggerFactory.getLogger(ReadingController.cl
     public ResponseEntity<?> sayHello(@RequestBody Reading reading) {
 		logger.info("Reading: "+reading.toString());
 		readingRepositor.save(reading);
+		//readingRepositor.saveAndFlush(reading);
         return new ResponseEntity<String>(HttpStatus.CREATED);
     }
 

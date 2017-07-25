@@ -2,13 +2,16 @@ package com.walmart.scm.fresh.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class GPS implements Serializable{
@@ -19,23 +22,35 @@ public class GPS implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	private String latitude;
 	private String longitude;
 	private String location;
 	private String context;
-	//private Reading reading;
+
+	/*@ManyToOne
+	@JoinColumn(name="read_id", referencedColumnName="read_id", nullable=false)*/
+	@ManyToOne(targetEntity=Reading.class, fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	private Reading reading;
 	
 	
 	public GPS()
 	{
 		
 	}
+
 	public GPS(String lat, String lon, String loc)
 	{
 		this.latitude = lat;
 		this.longitude = lon;
 		this.location = loc;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	public String getLatitude() {
@@ -64,11 +79,7 @@ public class GPS implements Serializable{
 	public void setContext(String context){
 		this.context = context;
 	}
-	
-	@ManyToOne
-	@JoinColumn(name="read_id", referencedColumnName="read_id", nullable=false)
-	private Reading reading;
-	
+
 	public Reading getReading(){
 		return reading;
 	}

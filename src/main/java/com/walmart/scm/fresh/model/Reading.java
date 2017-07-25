@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -23,7 +25,7 @@ public class Reading implements Serializable{
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="read_id")
-	private Long readingId;
+	private Integer readingId;
 	private Timestamp timestamp;
 	private Integer ambientTemp;
 	private Integer shelfLife;
@@ -32,6 +34,10 @@ public class Reading implements Serializable{
 	private Integer light;
 	private Integer vibration;
 	
+	//@OneToMany(mappedBy="reading", fetch=FetchType.EAGER, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="read_id", nullable=false)
+	private List<GPS> gps;
 	//private GPS agps;
 	
 	
@@ -82,15 +88,14 @@ public class Reading implements Serializable{
 	public void setVibration(Integer vibration) {
 		this.vibration = vibration;
 	}
-	public Long getReadingId() {
+	public Integer getReadingId() {
 		return readingId;
 	}
-	public void setReadingId(Long id) {
+	public void setReadingId(Integer id) {
 		this.readingId = id;
 	}
 	
-	@OneToMany(mappedBy="reading", cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-	private List<GPS> gps;
+	
 	public List<GPS> getGps() {
 		return gps;
 	}
